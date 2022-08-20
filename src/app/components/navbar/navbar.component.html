@@ -1,0 +1,6 @@
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand mr-auto" href="#">Blockchain Polls</a>
+  <button (click)="createPoll()" type="button" class="btn btn-secondary">Create Poll</button>
+</nav>
+
+<app-poll-create (closeEvent)="close()" *ngIf="showModal"></app-poll-create>

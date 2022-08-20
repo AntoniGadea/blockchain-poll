@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<section class="jumpotron bg-light text-center">
+    <h1>Polls Rethinked</h1>
+    <p class="lead text-muted">
+      Powered By Blockchain
+    </p>
+</section>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-5 col-md-4">
+      <div *ngFor="let poll of dataSet" class="poll-list">
+       <app-poll-card
+        (click)="setSelected(poll)"
+        [poll]="poll">
+      </app-poll-card>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-8">
+      <div class="poll-detail">
+        <app-poll-vote
+          *ngIf="selectedPoll"
+          [loadPoll]="selectedPoll">
+        </app-poll-vote>
+      </div>
+    </div>
+  </div>
+</div>

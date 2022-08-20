@@ -1,0 +1,19 @@
+<div *ngIf="poll" class="container">
+  <h3>{{poll.question}}</h3>
+    <form *ngIf="!poll.voted" [formGroup]="voteGroup" (ngSubmit)="submitForm()">
+      <div class="form-check" *ngFor="let opt of poll.options; let i = index">
+        <input
+          type="radio"
+          class="form-check-input"
+          formControlName="selected"
+          [value]="i"
+        />
+        <label class="form-check-label">{{ opt }}</label>
+      </div>
+
+      <button type="submit" class="btn btn-secondary mt-3" [disabled]="voteGroup.invalid">
+        Submit vote
+      </button>
+    </form>
+    <div *ngIf="poll.voted" #chart></div>
+</div>
