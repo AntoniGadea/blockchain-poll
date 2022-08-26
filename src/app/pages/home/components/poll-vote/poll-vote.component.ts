@@ -1,7 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as ApexCharts from 'apexcharts';
 import { Poll } from 'src/app/interfaces/Poll';
+import { PollVote } from 'src/app/interfaces/PollVote';
 
 @Component({
   selector: 'app-poll-vote',
@@ -18,6 +19,8 @@ export class PollVoteComponent implements OnInit {
     if(this.poll?.voted) this.createChart();
 
   }
+
+  @Output() pollVoted: EventEmitter<PollVote> = new EventEmitter();
 
   public poll?: Poll;
   public voteGroup: FormGroup;
@@ -37,7 +40,14 @@ export class PollVoteComponent implements OnInit {
 
 
   submitForm() {
-    console.log(this.voteGroup.value);
+    if (!this.poll?.id) return;
+
+    const pollVoted: PollVote = {
+        id: this.poll.id,
+        vote: this.voteGroup.get("selected")?.value
+    }
+
+    this.pollVoted.emit(pollVoted);
   }
 
   createChart() {

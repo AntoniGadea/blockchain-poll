@@ -8,7 +8,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-5 col-md-4">
-      <div *ngFor="let poll of dataSet" class="poll-list">
+      <div *ngFor="let poll of polls | async as Poll" class="poll-list">
        <app-poll-card
         (click)="setSelected(poll)"
         [poll]="poll">
@@ -19,7 +19,8 @@
       <div class="poll-detail">
         <app-poll-vote
           *ngIf="selectedPoll"
-          [loadPoll]="selectedPoll">
+          [loadPoll]="selectedPoll"
+          (pollVoted)="handlePollVote($event)">
         </app-poll-vote>
       </div>
     </div>

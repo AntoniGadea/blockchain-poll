@@ -3,4 +3,8 @@
   <button (click)="createPoll()" type="button" class="btn btn-secondary">Create Poll</button>
 </nav>
 
-<app-poll-create (closeEvent)="close()" *ngIf="showModal"></app-poll-create>
+<app-poll-create
+    *ngIf="showModal"
+    (closeEvent)="close()"
+    (pollCreated)="handlePollCreate($event)">
+</app-poll-create>

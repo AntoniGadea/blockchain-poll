@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PollCardComponent } from './pages/home/components/poll-item/poll-card.component';
 import { PollCreateComponent } from './components/poll-create/poll-create.component';
 import { PollVoteComponent } from './pages/home/components/poll-vote/poll-vote.component';
+import { PollService } from './services/poll.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { PollVoteComponent } from './pages/home/components/poll-vote/poll-vote.c
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [PollService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
