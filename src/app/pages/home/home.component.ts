@@ -11,7 +11,7 @@ import { PollService } from 'src/app/services/poll.service';
 })
 export class HomeComponent implements OnInit {
 
-  public polls: Observable<Poll[]>;
+  public polls: Promise<Poll[]>;
 
   public selectedPoll?: Poll;
 
@@ -22,7 +22,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.pollService.onEvent('PollCreated').subscribe(
+        () => {
+            this.polls = this.pollService.getPolls();
+        }
+    )
   }
 
   setSelected(poll: Poll) {
@@ -30,6 +34,8 @@ export class HomeComponent implements OnInit {
   }
 
   handlePollVote(event: PollVote) {
+    console.log(('here'));
+
     this.pollService.vote(event);
   }
 

@@ -40,10 +40,9 @@ export class PollVoteComponent implements OnInit {
 
 
   submitForm() {
-    if (!this.poll?.id) return;
 
     const pollVoted: PollVote = {
-        id: this.poll.id,
+        id: this.poll!.id,
         vote: this.voteGroup.get("selected")?.value
     }
 
@@ -51,10 +50,12 @@ export class PollVoteComponent implements OnInit {
   }
 
   createChart() {
+    if(!this.poll?.results) return;
+
     const options: ApexCharts.ApexOptions = {
       series: [
         {
-          data:[1,4,2]
+          data: this.poll.results
         }
       ],
       chart: {
